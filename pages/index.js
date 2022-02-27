@@ -4,19 +4,7 @@ import { useState, useEffect } from 'react'
 import PageLayout from '../styles/components/PageLayout'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
-
-  const [articles, setArticles] =useState([])
-
-    useEffect(() => {
-      fetch('https://newsapi.org/v2/everything?q=tesla&from=2022-01-27&sortBy=publishedAt&apiKey=311be6f7ef0e44c5a8ec33f44ecd2613')
-      .then(response  => response .json())
-      .then(response =>{
-        const {articles} = response
-        setArticles(articles)
-      })
-    },[])
-
+export default function Home({ articles }) {
 
   return (
     <PageLayout>
@@ -36,4 +24,14 @@ export default function Home() {
     </div>
     </PageLayout>
   )
+}
+
+export async function getServerSideProps(serverSide){
+  const response = await fetch('https://newsapi.org/v2/everything?q=padel&from=2022-01-27&sortBy=publishedAt&apiKey=311be6f7ef0e44c5a8ec33f44ecd2613')
+  const {articles} = await response.json()
+  return{
+    props:{
+      articles
+    }
+  }
 }
