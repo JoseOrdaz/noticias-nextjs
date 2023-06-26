@@ -26,8 +26,6 @@ export default function Home({ articles }) {
   )
 }
 
-https://newsapi.org/v2/everything?q=tesla&from=2023-05-26&sortBy=publishedAt&apiKey=311be6f7ef0e44c5a8ec33f44ecd2613
-
 export async function getServerSideProps(serverSide){
   const response = await fetch('https://newsapi.org/v2/everything?q=padel&sortBy=publishedAt&apiKey=311be6f7ef0e44c5a8ec33f44ecd2613')
   const {articles} = await response.json()
